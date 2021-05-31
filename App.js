@@ -18,6 +18,99 @@ class App extends Component {
     };
   }
 
+  categoriesScreen = () => {
+    const { index } = this.state;
+    const categories = ["All", "Chocolates & Candy", "Biscuits & Cakes", "Chips & Popcorn", "Namkeen & Sweets"];
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+          <View style={{ flex: 1, flexDirection: 'row' }}>
+            <View style={{ flex: 1.5, elevation: 1, zIndex: 9999, backgroundColor: 'red', flexDirection: 'row' }}>
+              <Animated.View style={{ height: 96, borderRadius: 32, width: 4, backgroundColor: 'green', marginTop: 8, top: this.leftBar.interpolate({ inputRange: [0, index], outputRange: [0, index * (124)] }) }} />
+              <View style={{ marginLeft: 16 }}>
+                <FlatList
+                  renderItem={this.renderItem}
+                  data={categories}
+                  extraData={this.state}
+                  keyExtractor={this.keyExtractor}
+                />
+              </View>
+            </View>
+            <View style={{ flex: 4, alignItems: 'center', justifyContent: 'center' }}>
+              <Text>Hiiii</Text>
+            </View>
+          </View>
+        </View>
+      </SafeAreaView>
+    )
+  }
+
+  signUpPage = () => {
+    return (
+      <View style={styles.container}>
+        <Animated.View
+          style={[styles.animatedContainer, {
+            borderBottomRightRadius: this.fade.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0, width],
+            })
+          }]}>
+          <Animated.Image
+            source={require("./bgImage.jpeg")}
+            style={[styles.imageStyle, {
+              borderBottomRightRadius: this.fade.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, width],
+              })
+            }]}
+          />
+          <View style={styles.skipTextContainer}>
+            <TouchableOpacity>
+              <Animated.Text style={[styles.skipText, {
+                color: this.fade.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [backGroundColor, 'red'],
+                })
+              }
+              ]}>
+                {appTexts.skip} &gt;
+              </Animated.Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={styles.titleContainer}
+          >
+            <Text
+              style={styles.titleText}>
+              {appTexts.mainTitle}
+            </Text>
+            <Animated.View>
+              <Animated.Text
+                style={[{
+                  color: this.fade.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [backGroundColor, 'white'],
+                  })
+                }, styles.subTitle]}>
+                {appTexts.subTitle}
+              </Animated.Text>
+            </Animated.View>
+          </View>
+        </Animated.View>
+        <Animated.View style={{ flex: this.fadeIn() }}>
+          <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 32 }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Continue with</Text>
+          </View>
+          <View>
+            <TextInput
+
+            />
+          </View>
+        </Animated.View>
+      </View>
+    );
+  }
+
   componentDidMount() {
     this.animateObject()
   }
@@ -89,95 +182,12 @@ class App extends Component {
   keyExtractor = (item, index) => index.toString()
 
   render() {
-    const { index } = this.state;
-    const categories = ["All", "Chocolates & Candy", "Biscuits & Cakes", "Chips & Popcorn", "Namkeen & Sweets"];
-    // return (
-    //   <SafeAreaView style={{ flex: 1 }}>
-    //     <View style={{ flex: 1 }}>
-    //       <View style={{ flex: 1, flexDirection: 'row' }}>
-    //         <View style={{ flex: 1.5, elevation: 1, zIndex: 9999, backgroundColor: 'red', flexDirection: 'row' }}>
-    //           <Animated.View style={{ height: 96, borderRadius: 32, width: 4, backgroundColor: 'green', marginTop: 8, top: this.leftBar.interpolate({ inputRange: [0, index], outputRange: [0, index * (124)] }) }} />
-    //           <View style={{ marginLeft: 16 }}>
-    //             <FlatList
-    //               renderItem={this.renderItem}
-    //               data={categories}
-    //               extraData={this.state}
-    //               keyExtractor={this.keyExtractor}
-    //             />
-    //           </View>
-    //         </View>
-    //         <View style={{ flex: 4, alignItems: 'center', justifyContent: 'center' }}>
-    //           <Text>Hiiii</Text>
-    //         </View>
-    //       </View>
-    //     </View>
-    //   </SafeAreaView>
-    // )
+    return (
+      this.signUpPage()
+    )
 
     // signup page
-    return (
-      <View style={styles.container}>
-        <Animated.View
-          style={[styles.animatedContainer, {
-            borderBottomRightRadius: this.fade.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0, width],
-            })
-          }]}>
-          <Animated.Image
-            source={require("./bgImage.jpeg")}
-            style={[styles.imageStyle, {
-              borderBottomRightRadius: this.fade.interpolate({
-                inputRange: [0, 1],
-                outputRange: [0, width],
-              })
-            }]}
-          />
-          <View style={styles.skipTextContainer}>
-            <TouchableOpacity>
-              <Animated.Text style={[styles.skipText, {
-                color: this.fade.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [backGroundColor, 'red'],
-                })
-              }
-              ]}>
-                {appTexts.skip} &gt;
-              </Animated.Text>
-            </TouchableOpacity>
-          </View>
-          <View
-            style={styles.titleContainer}
-          >
-            <Text
-              style={styles.titleText}>
-              {appTexts.mainTitle}
-            </Text>
-            <Animated.View>
-              <Animated.Text
-                style={[{
-                  color: this.fade.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [backGroundColor, 'white'],
-                  })
-                }, styles.subTitle]}>
-                {appTexts.subTitle}
-              </Animated.Text>
-            </Animated.View>
-          </View>
-        </Animated.View>
-        <Animated.View style={{ flex: this.fadeIn() }}>
-          <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 32 }}>
-            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Continue with</Text>
-          </View>
-          <View>
-            <TextInput
 
-            />
-          </View>
-        </Animated.View>
-      </View>
-    );
   }
 }
 
